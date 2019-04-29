@@ -8,6 +8,10 @@ use App\ConsumedDrink;
 
 class ConsumedDrinkController extends Controller
 {
+
+    const DAILY_MAX = 500;
+
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,66 @@ class ConsumedDrinkController extends Controller
      */
     public function index()
     {
-        return ConsumedDrink::all();
+//        $test = ConsumedDrink::with('drink')->get();
+//        dd($test);
+
+        return ConsumedDrink::with('drink')->get();
+    }
+
+    /**
+     * Display a total consumed caffeine.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function totalCaffeine()
+    {
+        $totalCaffeine = $this->getTotalCaffeine();
+
+
+        return ['totalCaffeine'=>$totalCaffeine];
+    }
+
+    function getTotalCaffeine(){
+        $allDrank = ConsumedDrink::with('drink')->get();
+        $totalCaffeine = 0;
+        foreach($allDrank as $drink){
+            $totalCaffeine += ($drink->drink->servings*$drink->drink->caffeine_amount);
+        }
+
+        return $totalCaffeine;
+    }
+
+    /**
+     * Suggest a drink that wont put you over the daily caffeine limit.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function suggestMaximumDrink()
+    {
+        $totalCaffeine = $this->getTotalCaffeine();
+
+        $drinkAvailable = Drink::all();
+        $suggestedDrinks = null;
+
+
+        foreach($drinkAvailable as $drink){
+            $currentCaffCount = $drink->servings*$drink->caffeine_amount;
+            if($currentCaffCount + $totalCaffeine <= ConsumedDrinkController::DAILY_MAX){
+                if($suggestedDrinks){
+//                    dd($drink);
+                    if($suggestedDrinks->servings * $suggestedDrinks->caffeine_ammount < $currentCaffCount){
+                        $suggestedDrinks = $drink;
+                    }
+                }
+                else{
+                    $suggestedDrinks = $drink;
+                }
+
+            }
+        }
+
+
+        return $suggestedDrinks;
     }
 
     /**
@@ -36,7 +99,12 @@ class ConsumedDrinkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $consumed = new ConsumedDrink($data);
+        $consumed->save();
+
+        return ConsumedDrink::with('drink')->get();
     }
 
     /**
@@ -81,6 +149,9 @@ class ConsumedDrinkController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $consumedDrink = ConsumedDrink::where('id', $id);
+        $consumedDrink->delete();
+
+        return ConsumedDrink::with('drink')->get();
     }
 }
