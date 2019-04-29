@@ -19,3 +19,5 @@ Route::get('/user', function (Request $request) {
     //dd($request);
     return 'user: '.$request->user();
 });
+
+Route::get('/drinks', 'DrinkController@index');
