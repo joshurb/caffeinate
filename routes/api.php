@@ -23,6 +23,7 @@ Route::get('/user', function (Request $request) {
 Route::get('/drinks', 'DrinkController@index');
 Route::get('/drinks-consumed', 'ConsumedDrinkController@index');
 Route::get('/total-caffeine', 'ConsumedDrinkController@totalCaffeine');
+Route::get('/total-caffeine-remaining', 'ConsumedDrinkController@totalCaffeineRemaining');
 Route::get('/suggest-drink', 'ConsumedDrinkController@suggestMaximumDrink');
 Route::post('/drank', 'ConsumedDrinkController@store');
 Route::delete('/delete-consumed-drink/{id}', 'ConsumedDrinkController@destroy');

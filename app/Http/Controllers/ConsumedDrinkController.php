@@ -38,6 +38,19 @@ class ConsumedDrinkController extends Controller
         return ['totalCaffeine'=>$totalCaffeine];
     }
 
+    /**
+     * Display a total remaining caffeine.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function totalCaffeineRemaining()
+    {
+        $totalCaffeine = $this->getTotalCaffeine();
+
+
+        return ['totalCaffeineRemaining'=>ConsumedDrinkController::DAILY_MAX-$totalCaffeine];
+    }
+
     function getTotalCaffeine(){
         $allDrank = ConsumedDrink::with('drink')->get();
         $totalCaffeine = 0;
@@ -65,7 +78,6 @@ class ConsumedDrinkController extends Controller
             $currentCaffCount = $drink->servings*$drink->caffeine_amount;
             if($currentCaffCount + $totalCaffeine <= ConsumedDrinkController::DAILY_MAX){
                 if($suggestedDrinks){
-//                    dd($drink);
                     if($suggestedDrinks->servings * $suggestedDrinks->caffeine_ammount < $currentCaffCount){
                         $suggestedDrinks = $drink;
                     }

@@ -1,0 +1,8 @@
+
+.jumbotron {
+    background-image: url("/image/caffeine-molecule.png");
+    background-repeat: no-repeat;
+    background-position-x: 95%;
+    /* background-position-y: 1%; */
+    background-size: 30%;
+}
