@@ -70,7 +70,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12 col-sm-12">
+        <div class="col-lg-6 col-sm-12">
             <h5>Consumed Drinks</h5>
             <table class="table table-striped">
                 <thead class="thead-dark">
@@ -88,11 +88,11 @@
             </table>
         </div>
 
-        {{--<div class="col-lg-6 col-sm-12">--}}
-            {{--Graphs--}}
+        <div class="col-lg-6 col-sm-12">
+            Graphs
 
 
-        {{--</div>--}}
+        </div>
 
 
     </div>
