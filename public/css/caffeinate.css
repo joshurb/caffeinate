@@ -6,3 +6,7 @@
     /* background-position-y: 1%; */
     background-size: 30%;
 }
+
+.row {
+    padding-top: 1em;
+}
