@@ -78,17 +78,3 @@ $('document').ready(function(){
 
 
 });
-
-// function drinkADrink(element){
-//     // console.log(element);
-//      let drink = { drink_id: element.dataset.drinkId };
-//     axios
-//         .post('http://caffeinate.test/api/drank', drink)
-//         .then(response => (app.consumedDrinks = response.data));
-// }
-
-// function suggestDrink(){
-//     axios
-//         .get('http://caffeinate.test/api/suggest-drink')
-//         .then(response => (app.suggestedNextDrink = response.data));
-// }
