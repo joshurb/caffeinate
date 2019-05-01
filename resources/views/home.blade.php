@@ -11,9 +11,7 @@
     <div class="jumbotron">
         <h1 class="display-4">Caffeinate! Dashboard</h1>
         <p class="lead">Track caffeine consumption... For safety!</p>
-        {{--<hr class="my-4">--}}
         <p>A utility to help prevent overdosing on caffeine.</p>
-        {{--<a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>--}}
     </div>
 
     <div class="row">
@@ -65,8 +63,7 @@
                     <button class="btn btn-outline-success drink-choice" v-on:click="checkAndDrink(toDrink)">Drink Selected</button>
                 </div>
             </div>
-            {{--Remaining Caffeine: @{{ caffeineLeft }}--}}
-            {{--Not in the mood for the suggested drink? Select your drink here: <select></select>--}}
+
         </div>
     </div>
     <div class="row">
@@ -124,8 +121,7 @@
 @endsection
 
 @push('scripts')
-    <!-- Load our React component. -->
-    {{--<script type="text/javascript" src="./js/LikeButton.js"></script>--}}
+
     <script type="text/javascript" src="./js/caffeinate.js"></script>
 
 
