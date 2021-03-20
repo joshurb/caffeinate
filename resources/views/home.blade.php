@@ -15,7 +15,6 @@
     </div>
 
     <div class="row">
-
         <div class="col-lg-6 col-sm-12">
             <h5>Suggestion Section</h5>
             <div class="card"  v-if="suggestedNextDrink">
@@ -24,7 +23,7 @@
                     <h6 class="card-subtitle mb-2 text-muted">
                         @{{ suggestedNextDrink.drink_name }}
                         <small>
-                            Servings: @{{ suggestedNextDrink.servings }}, Caffeine/serving: @{{ suggestedNextDrink.caffeine_amount }}
+                            Servings: @{{ suggestedNextDrink.servings }}, Caffeine/serving: @{{ suggestedNextDrink.caffeine_amount }}mg
                         </small>
                     </h6>
                     <p class="card-text">@{{ suggestedNextDrink.drink_description }}</p>
@@ -59,7 +58,6 @@
                         </select>
                     </div>
 
-
                     <button class="btn btn-outline-success drink-choice" v-on:click="checkAndDrink(toDrink)">Drink Selected</button>
                 </div>
             </div>
@@ -68,26 +66,8 @@
     </div>
     <div class="row">
         <div class="col-lg-12 col-sm-12">
-            <h5>Consumed Drinks</h5>
-            <table class="table table-striped">
-                <thead class="thead-dark">
-                <th>Drink Name</th>
-                <th>Total Caffeine</th>
-                <th>Un-Drink</th>
-                </thead>
-                <tbody>
-                <tr v-for="drink in consumedDrinks">
-                    <td>@{{ drink.drink.drink_name }}</td>
-                    <td>@{{ drink.drink.caffeine_amount * drink.drink.servings }}mg</td>
-                    <td><button class="btn btn-danger" v-on:click="deleteDrink(drink.id)">Un-Drink</button></td>
-                </tr>
-                </tbody>
-            </table>
+            <drinks-consumed-table v-bind:consumed_drinks="consumedDrinks" @undrink="deleteDrink">Consumed Drinks</drinks-consumed-table>
         </div>
-
-
-
-
     </div>
 
     <div id="myModal" class="modal" tabindex="-1" role="dialog">
@@ -109,20 +89,11 @@
             </div>
         </div>
     </div>
-
-
 </div>
-
-
-
-
-
-
 @endsection
 
 @push('scripts')
 
     <script type="text/javascript" src="./js/caffeinate.js"></script>
-
 
 @endpush
