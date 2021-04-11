@@ -8,11 +8,11 @@
 
 @section('content')
 <div id='app'>
-    <div class="jumbotron">
-        <h1 class="display-4">Caffeinate! Dashboard</h1>
-        <p class="lead">Track caffeine consumption... For safety!</p>
-        <p>A utility to help prevent overdosing on caffeine.</p>
-    </div>
+    <page-header>
+        <template v-slot:page-title>Caffeinate! Dashboard</template>
+        <template v-slot:slogan>Track caffeine consumption... For safety!</template>
+        <template v-slot:description>A utility to help prevent overdosing on caffeine.</template>
+    </page-header>
 
     <div class="row">
         <div class="col-lg-6 col-sm-12">
@@ -57,7 +57,7 @@
                             <option v-for="drink in drinks" v-bind:value="drink">@{{ drink.drink_name }} - @{{ drink.caffeine_amount * drink.servings }}mg</option>
                         </select>
                     </div>
-
+{{--                    <drink-a-drink-module v-bind:drinks="drinks"></drink-a-drink-module>--}}
                     <button class="btn btn-outline-success drink-choice" v-on:click="checkAndDrink(toDrink)">Drink Selected</button>
                 </div>
             </div>
@@ -70,25 +70,12 @@
         </div>
     </div>
 
-    <div id="myModal" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Too Much Caffeine! :(</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Sorry, that drink contains enough caffeine to put you over your daily limit. Please check the drink suggestion section
-                    for an option that may work</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <warning-modal>
+        <template v-slot:header>Too Much Caffeine! :-(</template>
+        <template v-slot:message>Sorry, that drink contains enough caffeine to put you over your daily limit. Please check the drink suggestion section
+            for an option that may work</template>
+    </warning-modal>
+
 </div>
 @endsection
 
